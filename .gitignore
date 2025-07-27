@@ -13,6 +13,9 @@ __pycache__/
 # Build & Output
 build/
 
+**/firebase_admin_key.json
+
+
 
 # VSCode
 .vscode/
