@@ -2,12 +2,12 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore} from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDFQBna53rTZ_gecXG3LPJgBM-4tpjJqrM",
-  authDomain: "diabetesprediction-5726d.firebaseapp.com",
-  projectId: "diabetesprediction-5726d",
-  storageBucket: "diabetesprediction-5726d.appspot.com", // ⚠️ You had `.firebasestorage.app`, correct this
-  messagingSenderId: "913605355770",
-  appId: "1:913605355770:web:eca2c1b7c65b1224468143"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
