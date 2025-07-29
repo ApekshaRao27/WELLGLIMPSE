@@ -40,16 +40,17 @@ const Step1Questionnaire = () => {
 
  const handleSubmit = async () => {
   try {
-   const answerValues = Array.from({ length: 10 }, (_, i) => answers[i] === "Yes" ? 1 : 0);
+    const answerValues = Array.from({ length: 10 }, (_, i) => answers[i] === "Yes" ? 1 : 0);
     let token = null;
-    // Try Firebase login
+
     const auth = getAuth();
     const user = auth.currentUser;
-   
+
     if (user) {
       token = await user.getIdToken();
-    } else {
-      // Else, try manual JWT login
+      console.log("Saved token:", token);
+    }
+     else {
       token = localStorage.getItem("token");
       console.log("Saved token:", token);
     }
@@ -59,6 +60,7 @@ const Step1Questionnaire = () => {
       return;
     }
 
+    //Predict diabetes risk
     const response = await axios.post(
       'http://localhost:5001/predict',
       { answers: answerValues },
@@ -68,11 +70,11 @@ const Step1Questionnaire = () => {
         },
       }
     );
-   console.log("JWT token being sent:", token);
 
     const { predictedLabel, riskScore } = response.data;
     const mongoId = localStorage.getItem("mongoId");
 
+    //Save to Firestore
     await addDoc(collection(db, 'questionnaireResponses'), {
       uid: mongoId,
       answers,
@@ -81,9 +83,25 @@ const Step1Questionnaire = () => {
       timestamp: serverTimestamp(),
     });
 
+    const suggestionRes = await axios.post('http://localhost:5001/generate-suggestions', {
+      risk: predictedLabel,
+      answers,
+    },{
+      headers: {
+      Authorization: `Bearer ${token}`, 
+    },
+    });
+
+    const suggestion = suggestionRes.data.suggestion;
+
+    //Navigate with risk, score, and suggestion
     setSubmitted(true);
     navigate('/Step2Result', {
-      state: { predictedLabel, riskScore }
+      state: {
+        predictedLabel,
+        riskScore,
+        suggestion,
+      }
     });
 
   } catch (error) {
@@ -91,7 +109,6 @@ const Step1Questionnaire = () => {
     alert("Failed. Please try again.");
   }
 };
-
 
   if (submitted) {
     return (
@@ -182,7 +199,7 @@ const styles = {
     borderRadius: "6px",
     cursor: "pointer",
     width: "100%",                
-  maxWidth: "240px", 
+  maxWidth: "200px", 
   },
   submitBtn: {
     backgroundColor: "#28a745",
@@ -191,8 +208,9 @@ const styles = {
     border: "none",
     borderRadius: "6px",
     fontSize: "16px",
-    cursor: "pointer",
-      width: "100%",   
+    cursor: "pointer",   
+    width:"100%",
+     maxWidth: "200px", 
   }
 };
 

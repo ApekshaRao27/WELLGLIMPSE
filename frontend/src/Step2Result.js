@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import reportImg from './assets/report-img.png';
 
+
 const Step2Result = () => {
   const location = useLocation();
   const [riskScore, setRiskScore] = useState(null);
   const [predictedLabel, setPredictedLabel] = useState("");
+  const { suggestion } = location.state || {};
 
- 
   useEffect(() => {
     if (location.state?.riskScore !== undefined) {
       setRiskScore(location.state.riskScore);
@@ -17,9 +18,9 @@ const Step2Result = () => {
   );
 
   const riskText =
-    riskScore >= 0.8
+    riskScore >= 0.7
       ? "High Risk"
-      : riskScore >= 0.5
+      : riskScore >= 0.4
       ? "Moderate Risk"
       : "Low Risk";
 
@@ -30,6 +31,10 @@ const Step2Result = () => {
       ? "rgb(239, 252, 0)"
       : "rgb(58, 164, 1)";
 
+  const message= riskText==="High Risk"?"We strongly recommend consulting a healthcare professional and taking proactive steps to manage your health.":
+              riskText==="Moderate Risk"?"You may consider consulting a healthcare provider to better understand your risk and get personalized tips.":
+             "This is a good opportunity to focus on preventive measures.";
+             
   return (
     <div className="container px-3" style={{ backgroundColor: "#0a0f2c"}}>
     <div className="text-white" style={{ backgroundColor: "#0a0f2c", minHeight: "100vh" ,overflowX:"hidden"}}>
@@ -38,7 +43,8 @@ const Step2Result = () => {
         <div className="col-md-7">
           <h1>Hello {localStorage.getItem('name')}, Here Are Your Results!</h1>
           <p className="lead">
-            Your diabetes risk assessment indicates a <strong>{riskText}</strong>. This is a good opportunity to focus on preventive measures.
+            Your diabetes risk assessment indicates a <strong>{riskText}</strong>.   
+            {message}      
           </p>
           <p>
             Based on your recent answers, here's a detailed overview of your health and personalized recommendations.
@@ -86,6 +92,10 @@ const Step2Result = () => {
             <li>Consult a healthcare professional.</li>
           </ul>
         </div>
+        <div className="mt-4">
+  <h5>Health Suggestions</h5>
+  <p>{suggestion || "No suggestions available."}</p>
+</div>
       </div>
     </div>
     </div>

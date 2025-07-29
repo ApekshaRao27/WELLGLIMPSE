@@ -1,0 +1,17 @@
+[33mcommit ca41a0f667eafe2e44fee29874b98b7b3c888eab[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: ApekshaRao27 <apeksharaoa@gmail.com>
+Date:   Mon Jul 28 00:20:22 2025 +0530
+
+    Moved Firebase config to .env file
+
+[33mcommit 6cba372b421162bd913e9783e708c55bdc0d160f[m
+Author: ApekshaRao27 <apeksharaoa@gmail.com>
+Date:   Sun Jul 27 18:35:53 2025 +0530
+
+    Remove Firebase keys from commit
+
+[33mcommit bc190f3acf7472ebeef5547ad1d891fb2a584474[m
+Author: ApekshaRao27 <apeksharaoa@gmail.com>
+Date:   Sun Jul 27 18:28:41 2025 +0530
+
+    first commit

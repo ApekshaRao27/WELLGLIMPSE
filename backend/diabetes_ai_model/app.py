@@ -9,6 +9,8 @@ import os
 from dotenv import load_dotenv
 from jwt.exceptions import InvalidSignatureError, ExpiredSignatureError, DecodeError
 from functools import wraps
+from ai_suggestion import build_gemini_prompt
+import google.generativeai as genai
 app = Flask(__name__)
 CORS(app)  # to allow requests from React
  
@@ -16,11 +18,6 @@ cred = credentials.Certificate("../config/firebase_admin_key.json")
 firebase_admin.initialize_app(cred)
 load_dotenv() 
 SECRET_KEY = os.getenv("JWT_SECRET")
-print("env key:",SECRET_KEY)
-
-#SECRET_KEY = "mysecretkey123"
-print("Flask SECRET_KEY:", SECRET_KEY)
-print("Backend SECRET_KEY being used:", repr(SECRET_KEY))
 
 def verify_token(f):
     @wraps(f)
@@ -83,6 +80,23 @@ def predict():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+#-------------------------------------------------------------------------
+@app.route('/generate-suggestions', methods=['POST'])
+@verify_token
+def generate_suggestions():
+    data = request.json
+    risk = data.get('risk')
+    answers = data.get('answers')  # List of 10 Yes/No strings
+
+    if risk is None or not answers or len(answers) != 10:
+        return jsonify({'error': 'Invalid input'}), 400
+
+    prompt = build_gemini_prompt(risk, answers)
+    gemini_model = genai.GenerativeModel('gemini-1.5-pro')
+    response = gemini_model.generate_content(prompt)
+    suggestion = response.text.strip()
+
+    return jsonify({'suggestion': suggestion})
 
 
 if __name__ == '__main__':

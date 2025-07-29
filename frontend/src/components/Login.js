@@ -1,5 +1,5 @@
 import  React,{useState,useEffect }  from 'react';
-import logo from '../assets/logo.png'; 
+import logo from '../assets/logo2.jpg'; 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PasswordInput from './PasswordInput';
@@ -66,7 +66,7 @@ const handleGoogleLogin = async () => {
 
     // Only store what’s absolutely needed
     localStorage.setItem("mongoId", res.data.mongoId); // Optional, or use context/state
-
+    localStorage.setItem('name', res.data.name);
     setMessage("Google login successful");
 
     setTimeout(() => {
