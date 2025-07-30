@@ -85,6 +85,7 @@ const Step1Questionnaire = () => {
     });
      
     const URL = process.env.REACT_APP_AI_API_URL || 'http://localhost:5001';
+    alert("Submitted successfully");
     const suggestionRes = await axios.post(`${URL}/generate-suggestions`, {
       risk: predictedLabel,
       answers,

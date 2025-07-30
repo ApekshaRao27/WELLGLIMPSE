@@ -10,8 +10,13 @@ const protectedRoute = require('./routes/protected');
 dotenv.config();
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://wellglimpse.vercel.app',
+  'https://wellglimpse-mkgwn0s47-apeksharao27s-projects.vercel.app'
+];
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: allowedOrigins,
   credentials: true 
 }));
 app.use(express.json());
