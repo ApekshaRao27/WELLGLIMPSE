@@ -15,11 +15,6 @@ if (process.env.NODE_ENV !== 'production') {
   serviceAccount = JSON.parse(process.env.FIREBASE_KEY_JSON);
 }
 
-router.get('/', (req, res) => {
-  res.send('API is running');
-});
-
-
 
 // Register
 router.post('/register', async (req, res) => {
