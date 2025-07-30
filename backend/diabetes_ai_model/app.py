@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 from flask_cors import CORS
 import firebase_admin;
-from firebase_admin import credentials, auth
+from firebase_admin import credentials, auth,initialize_app
 import jwt
 import os
 from dotenv import load_dotenv
@@ -11,11 +11,23 @@ from jwt.exceptions import InvalidSignatureError, ExpiredSignatureError, DecodeE
 from functools import wraps
 from ai_suggestion import build_gemini_prompt
 import google.generativeai as genai
+import json
+
+# 🔐 Load Firebase credentials from Render environment variable
+firebase_json = os.environ.get("FIREBASE_KEY_JSON")
+
+if firebase_json:
+    cred_dict = json.loads(firebase_json)
+    cred = credentials.Certificate(cred_dict)
+else:
+    cred = credentials.Certificate("../config/firebase_admin_key.json")
+
+initialize_app(cred)
+
 app = Flask(__name__)
 CORS(app)  # to allow requests from React
  
-cred = credentials.Certificate("../config/firebase_admin_key.json")
-firebase_admin.initialize_app(cred)
+
 load_dotenv() 
 SECRET_KEY = os.getenv("JWT_SECRET")
 
@@ -100,4 +112,5 @@ def generate_suggestions():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port=5001)
+     port = int(os.environ.get('PORT', 5001))
+     app.run(debug=True, host='0.0.0.0', port=port)
