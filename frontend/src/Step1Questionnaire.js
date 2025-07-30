@@ -150,21 +150,39 @@ const Step1Questionnaire = () => {
             </label>
           </div>
 
-          {currentIndex > 0 && (
-            <button style={{ ...styles.button, marginRight: '10px' }} onClick={() => setCurrentIndex(currentIndex - 1)}>
-              Back
-            </button>
-          )}
+          <div style={{
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  width: '100%',
+  padding: '10px'
+}}>
+  {currentIndex > 0 && (
+    <button
+      style={{ ...styles.button, marginBottom: '10px' }}
+      onClick={() => setCurrentIndex(currentIndex - 1)}
+    >
+      Back
+    </button>
+  )}
 
-          {currentIndex < questions.length - 1 ? (
-            <button style={styles.button} onClick={handleNext}>
-              Next
-            </button>
-          ) : (
-            <button style={styles.submitBtn} onClick={handleSubmit}>
-              Submit Answers
-            </button>
-          )}
+  {currentIndex < questions.length - 1 ? (
+    <button
+      style={{ ...styles.button, marginBottom: '10px' }}
+      onClick={handleNext}
+    >
+      Next
+    </button>
+  ) : (
+    <button
+      style={{ ...styles.submitBtn, marginBottom: '10px' }}
+      onClick={handleSubmit}
+    >
+      Submit Answers
+    </button>
+  )}
+</div>
+
         </>
       )}
     </div>
@@ -194,15 +212,15 @@ const styles = {
   options: {
     marginBottom: "20px"
   },
-  button: {
+button: {
     backgroundColor: "#007bff",
     color: "#fff",
     padding: "10px 18px",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
-    width: "100%",                
-  maxWidth: "200px", 
+    width: "100%",
+    maxWidth: "300px",
   },
   submitBtn: {
     backgroundColor: "#28a745",
@@ -211,10 +229,10 @@ const styles = {
     border: "none",
     borderRadius: "6px",
     fontSize: "16px",
-    cursor: "pointer",   
-    width:"100%",
-     maxWidth: "200px", 
-  }
+    cursor: "pointer",
+    width: "100%",
+    maxWidth: "300px",
+  },
 };
 
 export default Step1Questionnaire;
