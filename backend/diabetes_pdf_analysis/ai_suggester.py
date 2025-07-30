@@ -9,9 +9,9 @@ def get_gemini_suggestions(results, overall):
     for test, value in results.items():
         if value:
             summary_text += f"{test}: {value}\n"
-    summary_text += "\nPlease provide personalized health and lifestyle suggestions for this patient.Keep the suggestions short, practical, and under 5 points"
+    summary_text += "\nPlease provide personalized health and lifestyle suggestions for this patient.Keep the suggestions short, practical, and under 3 points"
     
     model = genai.GenerativeModel('gemini-1.5-pro')
-    #response = model.generate_content(summary_text)
-    #return response.text
-    return "Gemini API call disabled for now (billing paused)"
+    response = model.generate_content(summary_text)
+    return response.text
+    #return "Gemini API call disabled for now (billing paused)"

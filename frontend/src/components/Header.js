@@ -32,7 +32,6 @@ function Header(){
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">
       <Nav.Link href="/Home">Home</Nav.Link>
-      <Nav.Link href="#link">Contact Us</Nav.Link>
       <Nav.Link href="/Home#footer">Report An Issue</Nav.Link>
     </Nav>
     <Nav className="ms-auto d-flex align-items-center">

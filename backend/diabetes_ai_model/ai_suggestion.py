@@ -11,16 +11,16 @@ def build_gemini_prompt(risk,answers):
     print("📥 Answers type:", type(answers))
 
     questions = [
-        "Do you often feel excessive thirst?",
-        "Do you experience frequent urination?",
-        "Do you feel tired or fatigued regularly?",
-        "Do you have blurred vision?",
-        "Have you noticed sudden weight loss?",
-        "Do you have slow-healing wounds?",
-        "Do you experience tingling or numbness in hands/feet?",
-        "Do you have increased hunger even after meals?",
-        "Is there a family history of diabetes?",
-        "Do you have dark patches on the neck or armpits?"
+      "Do you have a family history of diabetes?",
+  "Do you often feel excessive thirst?",
+  "Do you urinate frequently?",
+  "Have you experienced sudden weight loss recently?",
+  "Do you feel tired or fatigued frequently?",
+  "Do you have blurred vision occasionally?",
+  "Are you physically active for at least 30 minutes daily?",
+  "Do you have high blood pressure?",
+  "Do you have trouble healing wounds or cuts?",
+  "Is your BMI greater than 25?"
     ]
 
     answer_lines = "\n".join([

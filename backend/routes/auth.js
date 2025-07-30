@@ -7,6 +7,15 @@ const jwt = require('jsonwebtoken');
 const admin=require('../firebase');
 require('dotenv').config();
 
+let serviceAccount;
+
+if (process.env.NODE_ENV !== 'production') {
+  serviceAccount = require('../config/firebase_admin_key.json');
+} else {
+  serviceAccount = JSON.parse(process.env.FIREBASE_KEY_JSON);
+}
+
+
 // Register
 router.post('/register', async (req, res) => {
   const { name, age, email, password } = req.body;
