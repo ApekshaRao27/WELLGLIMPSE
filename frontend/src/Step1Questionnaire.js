@@ -61,8 +61,9 @@ const Step1Questionnaire = () => {
     }
 
     //Predict diabetes risk
+    const BASE_URL = process.env.REACT_APP_AI_API_URL || 'http://localhost:5001';
     const response = await axios.post(
-      'http://localhost:5001/predict',
+      `${BASE_URL}/predict`,
       { answers: answerValues },
       {
         headers: {
@@ -82,8 +83,9 @@ const Step1Questionnaire = () => {
       riskScore,
       timestamp: serverTimestamp(),
     });
-
-    const suggestionRes = await axios.post('http://localhost:5001/generate-suggestions', {
+     
+    const URL = process.env.REACT_APP_AI_API_URL || 'http://localhost:5001';
+    const suggestionRes = await axios.post(`${URL}/generate-suggestions`, {
       risk: predictedLabel,
       answers,
     },{

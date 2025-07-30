@@ -36,8 +36,8 @@ function UploadReport() {
   setLoading(true);
   try {
     const token = await getAuthToken();
-
-    const res = await axios.post("http://127.0.0.1:5003/analyze", formData, {
+     const BASE_URL = process.env.REACT_APP_PDF_API_URL || 'http://localhost:5003';
+    const res = await axios.post(`${BASE_URL}/analyze`, formData, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },

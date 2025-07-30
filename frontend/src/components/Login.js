@@ -23,11 +23,12 @@ const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
   try {
-    
-    const res = await axios.post('http://localhost:5000/api/auth/login', {
-      email,
-      password
-    },{
+    const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const res = await axios.post(`${BASE_URL}/api/auth/login`, {
+  email,
+  password
+},
+    {
   withCredentials: true //to allow cookies to be sent
 });
      setMessage("Login successful");

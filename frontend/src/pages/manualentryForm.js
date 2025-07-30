@@ -62,7 +62,8 @@ function ManualEntryForm({ onManualResult }) {
   try {
     const token = await getAuthToken();
     console.log("🔐 Sending token:", token);
-    const res = await axios.post("http://127.0.0.1:5003/analyze_manual", payload, {
+     const BASE_URL = process.env.REACT_APP_PDF_API_URL || 'http://localhost:5003';
+    const res = await axios.post(`${BASE_URL}/analyze_manual`, payload, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
