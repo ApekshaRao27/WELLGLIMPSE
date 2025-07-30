@@ -15,10 +15,9 @@ const allowedOrigins = [
   'https://wellglimpse.vercel.app',
   'https://wellglimpse-mkgwn0s47-apeksharao27s-projects.vercel.app'
 ];
-app.options('*', cors({
-  origin: allowedOrigins,
-  credentials: true
-}));
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
+
 
 app.use(express.json());
 app.use(cookieParser());
