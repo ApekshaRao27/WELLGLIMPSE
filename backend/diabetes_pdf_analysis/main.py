@@ -6,13 +6,25 @@ from test_script import evaluate_risk  # Your risk evaluation logic
 from ai_suggester import get_gemini_suggestions  # Gemini suggestions
 from test_script import analyze_report  # Your OCR + analysis logic
 import firebase_admin;
-from firebase_admin import credentials;
+from firebase_admin import credentials,initialize_app
 from firebase_admin import auth as auth
 import jwt
 from jwt.exceptions import InvalidSignatureError, ExpiredSignatureError, DecodeError
 from functools import wraps
+import json
 from dotenv import load_dotenv
 load_dotenv()
+
+# 🔐 Load Firebase credentials from Render environment variable
+firebase_json = os.environ.get("FIREBASE_KEY_JSON")
+
+if firebase_json:
+    cred_dict = json.loads(firebase_json)
+    cred = credentials.Certificate(cred_dict)
+else:
+    cred = credentials.Certificate("../config/firebase_admin_key.json")
+
+initialize_app(cred)
 
 app = Flask(__name__)
 CORS(app) 
