@@ -10,13 +10,23 @@ const protectedRoute = require('./routes/protected');
 dotenv.config();
 const app = express();
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://wellglimpse.vercel.app',
-  'https://wellglimpse-mkgwn0s47-apeksharao27s-projects.vercel.app'
-];
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'https://wellglimpse.vercel.app'
+    ];
 
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 
 app.use(express.json());
