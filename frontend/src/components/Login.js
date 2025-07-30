@@ -59,8 +59,9 @@ const handleGoogleLogin = async () => {
     const idToken = await user.getIdToken(); // ✅ Firebase token
 
     // Send ID token to backend for verification + JWT cookie
+    const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     const res = await axios.post(
-      "http://localhost:5000/api/auth/google-login",
+      `${BASE_URL}/api/auth/google-login`,
       { idToken },
       { withCredentials: true } // ⚠️ Very important for cookie
     );
