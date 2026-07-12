@@ -11,7 +11,7 @@ def get_gemini_suggestions(results, overall):
             summary_text += f"{test}: {value}\n"
     summary_text += "\nPlease provide personalized health and lifestyle suggestions for this patient.Keep the suggestions short, practical, and under 3 points"
     
-    model = genai.GenerativeModel('gemini-1.5-pro')
+    model = genai.GenerativeModel('gemini-2.5-flash')
     response = model.generate_content(summary_text)
     return response.text
     #return "Gemini API call disabled for now (billing paused)"
