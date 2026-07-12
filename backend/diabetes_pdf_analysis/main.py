@@ -31,9 +31,6 @@ app = Flask(__name__)
 CORS(app) 
 
 SECRET_KEY = os.getenv("JWT_SECRET")
-if not firebase_admin._apps:
-        cred = credentials.Certificate("../config/firebase_admin_key.json")
-        firebase_admin.initialize_app(cred)
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
