@@ -8,7 +8,10 @@ import cv2
 import numpy as np
 
 # Tesseract path
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+import shutil
+tess_path = shutil.which("tesseract")
+if tess_path:
+    pytesseract.pytesseract.tesseract_cmd = tess_path
 
 # Field patterns
 lab_fields = {
