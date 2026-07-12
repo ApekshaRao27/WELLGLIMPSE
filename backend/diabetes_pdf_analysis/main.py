@@ -111,12 +111,13 @@ def analyze():
 @verify_token
 def analyze_manual():
     try:
-        print("🔥 /analyze_manual route hit")
+        print("STEP 1")
+
         data = request.get_json()
-        print("✅ Manual data received:", data)
+        print("STEP 2", data)
 
         results = {}
-        missing_data = False  # Track if any field was missing or invalid
+        missing_data = False
 
         for key, value in data.items():
             try:
@@ -124,43 +125,33 @@ def analyze_manual():
                     missing_data = True
                     continue
                 results[key.upper()] = float(value)
-            except ValueError:
+            except:
                 missing_data = True
-                continue  # Skip non-numeric or invalid values
 
-        #  Stop and return early if no valid input
-        if not results:
-            return jsonify({
-                "status": "no_data",
-                "message": "No valid data provided for analysis. Please enter at least one value."
-            })
+        print("STEP 3", results)
 
-        #  Evaluate only if results are present
         overall, risk_flags = evaluate_risk(results)
-        ai_suggestions = get_gemini_suggestions(results, overall).replace("*", "")
+        print("STEP 4", overall)
 
-        response = {
+        ai_suggestions = get_gemini_suggestions(results, overall)
+        print("STEP 5")
+
+        ai_suggestions = ai_suggestions.replace("*", "")
+        print("STEP 6")
+
+        return jsonify({
             "extracted": {
                 "results": results,
                 "overall": overall,
                 "risk_flags": risk_flags
             },
             "ai_advice": ai_suggestions
-        }
-
-        if missing_data:
-            response["note"] = "Some values were missing, so only partial analysis was done. If a test is not available, please enter 'N/A'."
-
-        return jsonify(response)
+        })
 
     except Exception as e:
         traceback.print_exc()
+        print("ERROR:", e)
         return jsonify({"error": str(e)}), 500
-
-print("✅ Registered routes:")
-for rule in app.url_map.iter_rules():
-    print(rule)
-
 
 
 # ---------------------------- Main Entry -----------------------------
