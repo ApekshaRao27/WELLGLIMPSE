@@ -96,19 +96,33 @@ def predict():
 @app.route('/generate-suggestions', methods=['POST'])
 @verify_token
 def generate_suggestions():
-    data = request.json
-    risk = data.get('risk')
-    answers = data.get('answers')  # List of 10 Yes/No strings
+    print("1. Route entered")
 
-    if risk is None or not answers or len(answers) != 10:
-        return jsonify({'error': 'Invalid input'}), 400
+    data = request.json
+
+    print("2. Data:", data)
+
+    risk = data.get("risk")
+    answers = data.get("answers")
+
+    print("3. Risk:", risk)
+    print("4. Answers:", answers)
 
     prompt = build_gemini_prompt(risk, answers)
-    gemini_model = genai.GenerativeModel('gemini-1.5-pro')
-    response = gemini_model.generate_content(prompt)
-    suggestion = response.text.strip()
 
-    return jsonify({'suggestion': suggestion})
+    print("5. Prompt built")
+
+    gemini_model = genai.GenerativeModel("gemini-2.5-flash")
+
+    print("6. Model created")
+
+    response = gemini_model.generate_content(prompt)
+
+    print("7. Gemini response received")
+
+    return jsonify({
+        "suggestion": response.text
+    })
 
 
 if __name__ == '__main__':

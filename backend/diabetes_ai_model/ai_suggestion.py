@@ -5,7 +5,6 @@ load_dotenv()
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-
 def build_gemini_prompt(risk,answers):
     print("📥 Answers payload:", answers)
     print("📥 Answers type:", type(answers))

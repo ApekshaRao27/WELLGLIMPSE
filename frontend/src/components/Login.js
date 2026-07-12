@@ -57,14 +57,15 @@ const handleGoogleLogin = async () => {
     const user = result.user;
 
     const idToken = await user.getIdToken(); // ✅ Firebase token
-
+     
     // Send ID token to backend for verification + JWT cookie
     const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     const res = await axios.post(
       `${BASE_URL}/api/auth/google-login`,
       { idToken },
-      { withCredentials: true } // ⚠️ Very important for cookie
+      { withCredentials: true } //Very important for cookie
     );
+
 
     // Only store what’s absolutely needed
     localStorage.setItem("mongoId", res.data.mongoId); // Optional, or use context/state
@@ -77,6 +78,7 @@ const handleGoogleLogin = async () => {
   } catch (error) {
     console.error("Google login error:", error);
     setMessage("Google login failed");
+    alert("Hey!Please register first before signing in with Google.");
   }
 };
 

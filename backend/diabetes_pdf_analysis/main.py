@@ -12,6 +12,7 @@ import jwt
 from jwt.exceptions import InvalidSignatureError, ExpiredSignatureError, DecodeError
 from functools import wraps
 import json
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -30,7 +31,6 @@ app = Flask(__name__)
 CORS(app) 
 
 SECRET_KEY = os.getenv("JWT_SECRET")
-print("env key:",SECRET_KEY)
 if not firebase_admin._apps:
         cred = credentials.Certificate("../config/firebase_admin_key.json")
         firebase_admin.initialize_app(cred)
@@ -85,7 +85,9 @@ def analyze():
     file.save(filepath)
 
     try:
+        print("📄 Analyzing report at:", filepath)
         extracted_data = analyze_report(filepath)
+        print("✅ Extracted data:", extracted_data)
 
         if extracted_data.get("status") == "no_data":
             return jsonify({
@@ -157,6 +159,11 @@ def analyze_manual():
     except Exception as e:
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
+
+print("✅ Registered routes:")
+for rule in app.url_map.iter_rules():
+    print(rule)
+
 
 
 # ---------------------------- Main Entry -----------------------------

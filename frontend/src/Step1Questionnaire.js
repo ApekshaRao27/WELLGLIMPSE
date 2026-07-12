@@ -48,18 +48,17 @@ const Step1Questionnaire = () => {
 
     if (user) {
       token = await user.getIdToken();
-      console.log("Saved token:", token);
     }
      else {
       token = localStorage.getItem("token");
-      console.log("Saved token:", token);
     }
 
     if (!token) {
       alert("User not logged in.");
       return;
     }
-
+    
+     alert("Submitted successfully");
     //Predict diabetes risk
     const BASE_URL = process.env.REACT_APP_AI_API_URL || 'http://localhost:5001';
     const response = await axios.post(
@@ -74,7 +73,7 @@ const Step1Questionnaire = () => {
 
     const { predictedLabel, riskScore } = response.data;
     const mongoId = localStorage.getItem("mongoId");
-
+     
     //Save to Firestore
     await addDoc(collection(db, 'questionnaireResponses'), {
       uid: mongoId,
@@ -83,9 +82,9 @@ const Step1Questionnaire = () => {
       riskScore,
       timestamp: serverTimestamp(),
     });
-     
+    
+   
     const URL = process.env.REACT_APP_AI_API_URL || 'http://localhost:5001';
-    alert("Submitted successfully");
     const suggestionRes = await axios.post(`${URL}/generate-suggestions`, {
       risk: predictedLabel,
       answers,
@@ -94,7 +93,7 @@ const Step1Questionnaire = () => {
       Authorization: `Bearer ${token}`, 
     },
     });
-
+    
     const suggestion = suggestionRes.data.suggestion;
 
     //Navigate with risk, score, and suggestion

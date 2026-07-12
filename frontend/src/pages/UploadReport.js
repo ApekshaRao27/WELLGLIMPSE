@@ -27,22 +27,30 @@ function UploadReport() {
 };
 
   const handleUpload = async () => {
-  if (!file)
+  if (!file){
      setMessage("Please select a pdf file");
+     return;
+  }
 
   const formData = new FormData();
   formData.append("file", file);
+  console.log("📝 Selected file:", file);
+  for (let pair of formData.entries()) {
+  console.log("📦 FormData content:", pair[0], pair[1]);
+}
 
+  console.log(formData);
   setLoading(true);
   try {
     const token = await getAuthToken();
+        console.log("🔐 Sending token:", token);
      const BASE_URL = process.env.REACT_APP_PDF_API_URL || 'http://localhost:5003';
     const res = await axios.post(`${BASE_URL}/analyze`, formData, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
     });
-
+    console.log("token sent");
     setUploadResult(res.data);
     setManualResult(null);
   } catch (err) {

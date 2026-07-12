@@ -29,7 +29,6 @@ export const fetchUserScores = async () => {
       };
     }).reverse();
 
-    console.log("📈 Results:", results);
 
     return results;
   } catch (error) {
