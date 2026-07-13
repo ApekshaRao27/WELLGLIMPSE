@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PasswordInput from './PasswordInput';
 import {auth,provider} from '../main';
-import { signInWithPopup,getAuth } from "firebase/auth";
-import EmailPage from '../pages/emailpage';
+import { signInWithPopup } from "firebase/auth";
 
 const Login = () => {
   const [message, setMessage] = useState('');

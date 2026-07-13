@@ -3,14 +3,9 @@ import dietimg from "../images/diet.png";
 import meditateimg from "../images/meditate.png";
 import workoutimg from "../images/workout.png";
 import monitoringimg from "../images/monitoring.png"
-import { ButtonGroup,Button,Card } from 'react-bootstrap';
+import { ButtonGroup,Button} from 'react-bootstrap';
 import { handleFindHospitals } from '../components/QuickActions';
 import { Link } from 'react-router-dom';
-import DiabetesInfo from '../components/DiabetesInfo';
-{/*import exerciseImg from "../images/exercise.png";
-import dietImg from "../images/diet.png";
-import monitorImg from "../images/monitor.png";
-import stressImg from "../images/stress.png";*/}
 
 export default function Management() {
   return (

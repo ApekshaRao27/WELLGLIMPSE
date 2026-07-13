@@ -1,9 +1,8 @@
 import React from "react";
 import {handleFindHospitals} from "../components/QuickActions";
-import { ButtonGroup,Button,Card } from 'react-bootstrap';
+import { ButtonGroup,Button } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
-import DiabetesInfo from '../components/DiabetesInfo';
 export default function Symptoms() {
   
        

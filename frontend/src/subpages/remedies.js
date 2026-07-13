@@ -3,7 +3,6 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 import { ButtonGroup,Button} from 'react-bootstrap';
 import { handleFindHospitals } from '../components/QuickActions';
 import { Link } from 'react-router-dom';
-import DiabetesInfo from '../components/DiabetesInfo';
 export default function Remedy(){
     const remedies = [
     {

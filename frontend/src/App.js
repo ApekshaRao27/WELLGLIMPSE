@@ -4,7 +4,6 @@ import './App.css';
 import Header from './components/Header';
 import DiabetesInfo from './components/DiabetesInfo';
 import Types from './subpages/types';
-import FAQSection from './components/FAQSection'; 
 import Symptoms from './subpages/symptoms';
 import Management from './subpages/management';
 import Complications from './subpages/prevention';

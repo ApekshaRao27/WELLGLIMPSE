@@ -3,7 +3,6 @@ import AIDiagnosisSummary from './components/AIDiagnosisSummary';
 import DailyChallenges from "./components/DailyChallenges";
 import ChatBox from "./components/ChatBox";
 import QuickActions from "./components/QuickActions";
-import Character from "./components/AIGuideAvatar";
 import DoctorAnimation from "./components/AIGuideAvatar";
  import { fetchUserScores } from "./fetchUserScores";
 function Home(){

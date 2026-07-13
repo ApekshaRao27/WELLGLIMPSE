@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonGroup,Button,Card } from 'react-bootstrap';
+import { ButtonGroup,Button } from 'react-bootstrap';
 import ChatBox from './ChatBox';
 import image from "../images/gluco.png";
 import { Link } from 'react-router-dom';

@@ -3,7 +3,6 @@ import { db } from './firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Step2Result from './Step2Result';
 import { getAuth } from "firebase/auth";
 
 

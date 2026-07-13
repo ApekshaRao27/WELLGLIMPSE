@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ButtonGroup,Button,Card ,Row,Col} from 'react-bootstrap';
+import { ButtonGroup,Button,Row,Col} from 'react-bootstrap';
 import { handleFindHospitals } from '../components/QuickActions';
-import DiabetesInfo from '../components/DiabetesInfo';
 export default function Types() {
 
   return (
