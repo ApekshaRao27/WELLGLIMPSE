@@ -6,16 +6,13 @@ import reportImg from './assets/report-img.png';
 const Step2Result = () => {
   const location = useLocation();
   const [riskScore, setRiskScore] = useState(null);
-  const [predictedLabel, setPredictedLabel] = useState("");
   const { suggestion } = location.state || {};
 
-  useEffect(() => {
-    if (location.state?.riskScore !== undefined) {
-      setRiskScore(location.state.riskScore);
-      setPredictedLabel(location.state.predictedLabel || "");
-    } 
-    }
-  );
+useEffect(() => {
+  if (location.state?.riskScore !== undefined) {
+    setRiskScore(location.state.riskScore);
+  }
+}, [location.state]);
 
   const riskText =
     riskScore >= 0.7

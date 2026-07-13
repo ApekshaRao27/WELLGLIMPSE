@@ -29,7 +29,7 @@ const handleRegister = async (e) => {
   if (Object.keys(errs).length === 0) {
     try {
       const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      const res = await axios.post(`${BASE_URL}/api/auth/register`, {
+      await axios.post(`${BASE_URL}/api/auth/register`, {
         name,
         age,
         email,

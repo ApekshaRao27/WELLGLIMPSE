@@ -14,11 +14,11 @@ const [password, setPassword] = useState('');
   
 
     // If already logged in, redirect to /Home
-  useEffect(() => {
-    if (localStorage.getItem('isLoggedIn')) {
-      navigate('/Home');
-    }
-  }, []);
+ useEffect(() => {
+  if (localStorage.getItem("isLoggedIn")) {
+    navigate("/home");
+  }
+}, [navigate]);
 
   const handleLogin = async () => {
   try {
