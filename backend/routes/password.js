@@ -14,7 +14,7 @@ router.post('/forgot-password', async (req, res) => {
   user.tokenExpiry = Date.now() + 15 * 60 * 1000; // 15 minutes
   await user.save();
 
-  const link = `http://localhost:3000/reset-password/${token}`;
+  const link = `${process.env.FRONTEND_URL}/reset-password/${token}`;
 
   // ✅ Replace with your actual email and app password
   const transporter = nodemailer.createTransport({

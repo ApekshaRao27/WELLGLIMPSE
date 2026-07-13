@@ -11,7 +11,12 @@ const EmailPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/forgot-password', { email });
+      const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+        await axios.post(
+          `${BASE_URL}/api/forgot-password`,
+          { email }
+        );
       
       setMessage(response.data.msg);
       setTimeout(() => {
